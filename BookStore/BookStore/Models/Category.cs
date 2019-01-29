@@ -8,17 +8,14 @@ namespace BookStore.Models
 {
     public class Category
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
-        public string Title { get; set; }
+        //public string Title { get; set; }
 
-        public string Description { get; set; }
+       //public string Description { get; set; }
 
-        public virtual ICollection<Article> Articles { get; set; }
+        //public virtual ICollection<Book> Articles { get; set; }
     }
 
-    public class Article
-    {
-
-    }
+    
 }

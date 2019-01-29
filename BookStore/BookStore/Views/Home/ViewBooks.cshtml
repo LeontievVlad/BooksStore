@@ -1,6 +1,8 @@
-﻿@{
-    ViewBag.Title = "Book Store";
+﻿
+@{
+    ViewBag.Title = "View Books";
 }
+
 
 <div>
     <table class="table">
@@ -11,11 +13,14 @@
         </tr>
         @foreach (var item in ViewBag.Books)
         {
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.Title</td>
-            <td>@item.Description</td>
-        </tr>
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+            </tr>
         }
     </table>
 </div>
+
+
+
