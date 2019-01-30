@@ -17,8 +17,7 @@ namespace BookStore.Models
         {
             db.Books.Add(new Book {  Title = "Book 1",
                 Author = "Author 1",
-                Description = "Some Description for Book 1",
-                Category = "Category 1"
+                Description = "Some Description for Book 1"
             });
 
            

@@ -15,6 +15,6 @@ namespace BookStore.Models
 
         public string Description { get; set; }
 
-        public string Category { get; set; }
+        //public string Category { get; set; }
     }
 }
