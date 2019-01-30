@@ -17,34 +17,8 @@ namespace BookStore.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult AddBook()
-        {
-            return View();
-        }
+       
+        
 
-        [HttpPost]
-        public ActionResult ViewBooks(Book book)
-        {
-            var books = db.Books.Add(book); ;
-            ViewBag.Books = books;
-            
-
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
