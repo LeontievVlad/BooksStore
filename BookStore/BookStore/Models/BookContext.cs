@@ -9,20 +9,15 @@ namespace BookStore.Models
     public class BookContext : DbContext
     {
         public DbSet<Book> Books{ get; set; }
+
+        public System.Data.Entity.DbSet<BookStore.Models.Category> Categories { get; set; }
     }
 
     public class BookDbInit : DropCreateDatabaseAlways<BookContext>
     {
-        protected override void Seed(BookContext db)
+        protected override void Seed(BookContext context)
         {
-            db.Books.Add(new Book {  Title = "Book 1",
-                Author = "Author 1",
-                Description = "Some Description for Book 1"
-            });
-
-           
-
+            base.Seed(context);
         }
-
     }
 }
