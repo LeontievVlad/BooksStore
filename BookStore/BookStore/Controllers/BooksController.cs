@@ -17,6 +17,8 @@ namespace BookStore.Controllers
         // GET: Books
         public ActionResult Index()
         {
+            var books = db.Books.Include(p => p.Category);
+           
             return View(db.Books.ToList());
         }
 
@@ -46,7 +48,7 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Author,Description,Price")] Book book)
+        public ActionResult Create([Bind(Include = "Id,Title,Author,Description,Price,CatId")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +80,7 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Author,Description,Price")] Book book)
+        public ActionResult Edit([Bind(Include = "Id,Title,Author,Description,Price,CatId")] Book book)
         {
             if (ModelState.IsValid)
             {

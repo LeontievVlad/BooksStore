@@ -12,8 +12,9 @@ namespace BookStore.Controllers
         BookContext db = new BookContext();
         public ActionResult Index()
         {
-            var books = db.Books;
-            ViewBag.Books = books;
+            
+
+            
             return View();
         }
 
