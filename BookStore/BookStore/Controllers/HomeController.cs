@@ -10,17 +10,11 @@ namespace BookStore.Controllers
 {
     public class HomeController : Controller
     {
-        
+        private BookStoreContext db = new BookStoreContext();
         public ActionResult Index()
-        { 
-            
-
-
-            return View();
+        {
+            return View(db.Books.ToList());
         }
-
-       
         
-
     }
 }
