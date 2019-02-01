@@ -22,3 +22,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+p .mybtn {
+    color: red;
+    margin: 20px;
+}

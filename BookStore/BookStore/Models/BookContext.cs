@@ -10,7 +10,7 @@ namespace BookStore.Models
     {
         public DbSet<Book> Books{ get; set; }
 
-        public System.Data.Entity.DbSet<BookStore.Models.Category> Categories { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 
     public class BookDbInit : DropCreateDatabaseAlways<BookContext>
@@ -19,5 +19,7 @@ namespace BookStore.Models
         {
             base.Seed(context);
         }
-    }
+
+     
+}
 }

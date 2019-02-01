@@ -12,7 +12,7 @@ namespace BookStore.Models
 
         public ICollection<Book> Books { get; set; }
 
-        public Category()
+       public Category()
         {
             Books = new List<Book>();
         }

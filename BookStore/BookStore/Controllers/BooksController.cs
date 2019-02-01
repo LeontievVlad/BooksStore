@@ -12,12 +12,12 @@ namespace BookStore.Controllers
 {
     public class BooksController : Controller
     {
-        private BookContext db = new BookContext();
+        BookContext db = new BookContext();
 
         // GET: Books
         public ActionResult Index()
         {
-            var books = db.Books.Include(p => p.Category);
+            //var books = db.Books.Include(p => p.Category);
            
             return View(db.Books.ToList());
         }
