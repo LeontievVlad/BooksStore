@@ -12,14 +12,13 @@ namespace BookStore.Controllers
 {
     public class BooksController : Controller
     {
-        BookContext db = new BookContext();
+        private BookStoreContext db = new BookStoreContext();
 
         // GET: Books
         public ActionResult Index()
         {
-            //var books = db.Books.Include(p => p.Category);
-           
-            return View(db.Books.ToList());
+            var books = db.Books.Include(b => b.Category);
+            return View(books.ToList());
         }
 
         // GET: Books/Details/5
@@ -40,6 +39,7 @@ namespace BookStore.Controllers
         // GET: Books/Create
         public ActionResult Create()
         {
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "NameCategory");
             return View();
         }
 
@@ -48,7 +48,7 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Author,Description,Price,CatId")] Book book)
+        public ActionResult Create([Bind(Include = "Id,Title,Author,Description,Price,CategoryId")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -57,6 +57,7 @@ namespace BookStore.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "NameCategory", book.CategoryId);
             return View(book);
         }
 
@@ -72,6 +73,7 @@ namespace BookStore.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "NameCategory", book.CategoryId);
             return View(book);
         }
 
@@ -80,7 +82,7 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Author,Description,Price,CatId")] Book book)
+        public ActionResult Edit([Bind(Include = "Id,Title,Author,Description,Price,CategoryId")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -88,6 +90,7 @@ namespace BookStore.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "NameCategory", book.CategoryId);
             return View(book);
         }
 

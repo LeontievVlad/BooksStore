@@ -183,7 +183,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
-    <Compile Include="Models\BookContext.cs" />
+    <Compile Include="Models\BookStoreContext.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />

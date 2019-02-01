@@ -12,7 +12,7 @@ namespace BookStore.Controllers
 {
     public class CategoriesController : Controller
     {
-        BookContext db = new BookContext();
+        private BookStoreContext db = new BookStoreContext();
 
         // GET: Categories
         public ActionResult Index()
@@ -46,7 +46,7 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryId,CategoryName")] Category category)
+        public ActionResult Create([Bind(Include = "CategoryId,NameCategory")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryId,CategoryName")] Category category)
+        public ActionResult Edit([Bind(Include = "CategoryId,NameCategory")] Category category)
         {
             if (ModelState.IsValid)
             {

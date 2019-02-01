@@ -8,13 +8,10 @@ namespace BookStore.Models
     public class Category
     {
         public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
+        public string NameCategory { get; set; }
 
-        public ICollection<Book> Books { get; set; }
+        public virtual IList<Book> Books { get; set; }
 
-       public Category()
-        {
-            Books = new List<Book>();
-        }
+       
     }
 }
