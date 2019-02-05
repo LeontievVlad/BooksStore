@@ -95,12 +95,12 @@ namespace BookStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title,Author,Description,Price,ImagePath,ImageFile,CategoryId")] Book book)
         {
-            //string filename = Path.GetFileNameWithoutExtension(book.ImageFile.FileName);
-            //string extension = Path.GetExtension(book.ImageFile.FileName);
-            //filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-            //book.ImagePath = "~/images/" + filename;
-            //filename = Path.Combine(Server.MapPath("~/images/"), filename);
-            //book.ImageFile.SaveAs(filename);
+            string filename = Path.GetFileNameWithoutExtension(book.ImageFile.FileName);
+            string extension = Path.GetExtension(book.ImageFile.FileName);
+            filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+            book.ImagePath = "~/images/" + filename;
+            filename = Path.Combine(Server.MapPath("~/images/"), filename);
+            book.ImageFile.SaveAs(filename);
 
             if (ModelState.IsValid)
             {
@@ -134,6 +134,10 @@ namespace BookStore.Controllers
         {
             
             Book book = db.Books.Find(id);
+            /////
+            
+            System.IO.File.Delete(Server.MapPath(book.ImagePath));
+            /////
             db.Books.Remove(book);
             
             db.SaveChanges();
