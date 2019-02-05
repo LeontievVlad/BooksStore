@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BookStore.Models.Book>
+
+@{
+    ViewBag.Title = "View";
+}
+
+
+<table class="table">
+    <tr>
+        <th class="col-md-2">
+            @*@Html.DisplayNameFor(model => model.ImagePath)*@
+        </th>
+        <th class="col-md-1">
+            @*@Html.DisplayNameFor(model => model.Category.NameCategory)*@
+            Category
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th class="col-md-4">
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.Price) &#8372;
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-md-2">
+                @*@Html.DisplayFor(modelItem => item.ImagePath)*@
+                <img src="@Url.Content(item.ImagePath) " width="150" height="100" />
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.Category.NameCategory)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td class="col-md-4">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.Price) &#8372;
+            </td>
+
+            <td>
+                <input type="submit" value="Buy" />
+            </td>
+        </tr>
+    }
+
+    
+
+</table>

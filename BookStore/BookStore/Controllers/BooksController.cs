@@ -24,6 +24,13 @@ namespace BookStore.Controllers
             return View(books.ToList());
         }
 
+        public ActionResult View()
+        {
+            var books = db.Books.Include(b => b.Category);
+
+            return View(books.ToList());
+        }
+
         // GET: Books/Details/5
         public ActionResult Details(int? id)
         {
@@ -44,7 +51,7 @@ namespace BookStore.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "NameCategory");
-            return View();
+            return base.View();
         }
 
         // POST: Books/Create
