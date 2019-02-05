@@ -11,7 +11,5 @@ namespace BookStore.Models
         public string NameCategory { get; set; }
 
         public virtual IList<Book> Books { get; set; }
-
-       
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -12,12 +13,14 @@ namespace BookStore.Controllers
 {
     public class BooksController : Controller
     {
-        private BookStoreContext db = new BookStoreContext();
+        private BookContext db = new BookContext();
 
         // GET: Books
+        
         public ActionResult Index()
         {
             var books = db.Books.Include(b => b.Category);
+            
             return View(books.ToList());
         }
 
@@ -33,6 +36,7 @@ namespace BookStore.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(book);
         }
 
@@ -48,8 +52,15 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Author,Description,Price,CategoryId")] Book book)
+        public ActionResult Create([Bind(Include = "Id,Title,Author,Description,Price,ImagePath,ImageFile,CategoryId")] Book book)
         {
+            string filename = Path.GetFileNameWithoutExtension(book.ImageFile.FileName);
+            string extension = Path.GetExtension(book.ImageFile.FileName);
+            filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+            book.ImagePath = "~/images/" + filename;
+            filename = Path.Combine(Server.MapPath("~/images/"), filename);
+            book.ImageFile.SaveAs(filename);
+
             if (ModelState.IsValid)
             {
                 db.Books.Add(book);
@@ -82,8 +93,15 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Author,Description,Price,CategoryId")] Book book)
+        public ActionResult Edit([Bind(Include = "Id,Title,Author,Description,Price,ImagePath,ImageFile,CategoryId")] Book book)
         {
+            //string filename = Path.GetFileNameWithoutExtension(book.ImageFile.FileName);
+            //string extension = Path.GetExtension(book.ImageFile.FileName);
+            //filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+            //book.ImagePath = "~/images/" + filename;
+            //filename = Path.Combine(Server.MapPath("~/images/"), filename);
+            //book.ImageFile.SaveAs(filename);
+
             if (ModelState.IsValid)
             {
                 db.Entry(book).State = EntityState.Modified;
@@ -114,8 +132,10 @@ namespace BookStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            
             Book book = db.Books.Find(id);
             db.Books.Remove(book);
+            
             db.SaveChanges();
             return RedirectToAction("Index");
         }
