@@ -1,4 +1,10 @@
-﻿@model IEnumerable<BookStore.Models.Book>
+﻿@*@model IEnumerable<BookStore.Models.Book>*@
+
+@using BookStore.Models;
+@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.IPagedList<Book>
+
 
 @{
     ViewBag.Title = "View";
@@ -15,16 +21,16 @@
             Category
         </th>
         <th class="col-md-2">
-            @Html.DisplayNameFor(model => model.Title)
+            @*@Html.DisplayNameFor(model => model.Title)*@
         </th>
         <th class="col-md-2">
-            @Html.DisplayNameFor(model => model.Author)
+            @*@Html.DisplayNameFor(model => model.Author)*@
         </th>
         <th class="col-md-4">
-            @Html.DisplayNameFor(model => model.Description)
+            @*@Html.DisplayNameFor(model => model.Description)*@
         </th>
         <th class="col-md-1">
-            @Html.DisplayNameFor(model => model.Price) &#8372;
+            @*@Html.DisplayNameFor(model => model.Price) &#8372;*@
         </th>
 
         <th></th>
@@ -59,6 +65,11 @@
         </tr>
     }
 
-    
+
 
 </table>
+
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("View", new { page }))

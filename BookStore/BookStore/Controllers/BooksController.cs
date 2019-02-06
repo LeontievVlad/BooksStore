@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BookStore.Models;
+using PagedList;
 
 namespace BookStore.Controllers
 {
@@ -24,12 +25,22 @@ namespace BookStore.Controllers
             return View(books.ToList());
         }
 
-        public ActionResult View()
+        public ActionResult View(int? page)
         {
-            var books = db.Books.Include(b => b.Category);
+            //var books = db.Books.Include(b => b.Category);
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            var books = db.Books.Include(b => b.Category).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
+            //books = db.Books.Include(b => b.Category);
+            return View(books);
 
-            return View(books.ToList());
+            //return View(books.ToList().ToPagedList(pageNumber, pageSize));
+
+
+
+            //return View(books.ToList());
         }
+
 
         // GET: Books/Details/5
         public ActionResult Details(int? id)
