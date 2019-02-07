@@ -25,20 +25,35 @@ namespace BookStore.Controllers
             return View(books.ToList());
         }
 
-        public ActionResult View(int? page)
+        public ActionResult View(string search, int? page)
         {
+            //dropdownlist for categories
+            SelectList categ = new SelectList(db.Categories, "NameCategory", "NameCategory");
+            ViewBag.Books = categ;
             //var books = db.Books.Include(b => b.Category);
             int pageSize = 3;
             int pageNumber = (page ?? 1);
             var books = db.Books.Include(b => b.Category).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
-            //books = db.Books.Include(b => b.Category);
-            return View(books);
+
+            if (search == "" || search == null)
+            {
+                
+                return View(books);
+            }
+            else
+            {
+                books = db.Books.Where(x => x.Title.Contains(search))
+                    .OrderBy(x => x.Title).ToPagedList(pageNumber, pageSize);
+                return View(books);
+            }
+
+            
+
+
 
             //return View(books.ToList().ToPagedList(pageNumber, pageSize));
-
-
-
             //return View(books.ToList());
+            //return View(books);
         }
 
 
@@ -72,13 +87,21 @@ namespace BookStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,Author,Description,Price,ImagePath,ImageFile,CategoryId")] Book book)
         {
-            string filename = Path.GetFileNameWithoutExtension(book.ImageFile.FileName);
-            string extension = Path.GetExtension(book.ImageFile.FileName);
-            filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-            book.ImagePath = "~/images/" + filename;
-            filename = Path.Combine(Server.MapPath("~/images/"), filename);
-            book.ImageFile.SaveAs(filename);
+            if (book.ImagePath == null)
+            {
+                book.ImagePath = "";
+            }
+            else
+            {
 
+
+                string filename = Path.GetFileNameWithoutExtension(book.ImageFile.FileName);
+                string extension = Path.GetExtension(book.ImageFile.FileName);
+                filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+                book.ImagePath = "~/images/" + filename;
+                filename = Path.Combine(Server.MapPath("~/images/"), filename);
+                book.ImageFile.SaveAs(filename);
+            }
             if (ModelState.IsValid)
             {
                 db.Books.Add(book);
@@ -153,7 +176,7 @@ namespace BookStore.Controllers
             
             Book book = db.Books.Find(id);
             /////
-            
+            /////delete image from folder images
             System.IO.File.Delete(Server.MapPath(book.ImagePath));
             /////
             db.Books.Remove(book);

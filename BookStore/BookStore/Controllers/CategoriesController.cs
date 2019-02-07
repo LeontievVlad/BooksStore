@@ -17,8 +17,12 @@ namespace BookStore.Controllers
         // GET: Categories
         public ActionResult Index()
         {
+            //SelectList categ = new SelectList(db.Books, "NameCategory", "NameCategory");
+            //ViewBag.Books = categ;
             return View(db.Categories.ToList());
         }
+
+        
 
         // GET: Categories/Details/5
         public ActionResult Details(int? id)

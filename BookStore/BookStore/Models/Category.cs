@@ -12,5 +12,6 @@ namespace BookStore.Models
         public string NameCategory { get; set; }
 
         public virtual IPagedList<Book> Books { get; set; }
+        
     }
 }

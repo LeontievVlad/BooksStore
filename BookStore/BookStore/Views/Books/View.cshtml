@@ -11,6 +11,25 @@
 }
 
 
+@*@model IEnumerable<BookStore.Models.Book>
+@Html.DropDownList("CagegoryId", ViewBag.CagegoryId as SelectList)*@
+
+
+
+<br />
+@{
+
+    foreach (var item in Model)
+    {
+
+        <button type="button" class="btn btn-success">
+            @Html.DisplayFor(modelItem => item.Category.NameCategory)
+        </button>
+
+
+    }
+}
+<br /><br />
 <table class="table">
     <tr>
         <th class="col-md-2">
@@ -22,15 +41,19 @@
         </th>
         <th class="col-md-2">
             @*@Html.DisplayNameFor(model => model.Title)*@
+            Title
         </th>
         <th class="col-md-2">
             @*@Html.DisplayNameFor(model => model.Author)*@
+            Author
         </th>
         <th class="col-md-4">
             @*@Html.DisplayNameFor(model => model.Description)*@
+            Description
         </th>
         <th class="col-md-1">
             @*@Html.DisplayNameFor(model => model.Price) &#8372;*@
+            Price &#8372;
         </th>
 
         <th></th>
@@ -50,7 +73,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td class="col-md-2">
-                @Html.DisplayFor(modelItem => item.Author)
+                @Html.DisplayFor(modelItem => item.Category)
             </td>
             <td class="col-md-4">
                 @Html.DisplayFor(modelItem => item.Description)
@@ -70,6 +93,10 @@
 </table>
 
 
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("View", new { page }))
+    @Html.PagedListPager(Model, page => Url.Action("View", new { page }))
+
+    @*<a href="/Books/Index">
+           <button type="button" class="btn btn-success btn-lg">End test</button>
+        </a>*@

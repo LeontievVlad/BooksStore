@@ -24,6 +24,15 @@
                     <li>@Html.ActionLink("Books", "Index", "Books")</li>
                     <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
                     <li>@Html.ActionLink("View", "View", "Books")</li>
+                    
+                    <li style="margin: 11px 0 0 50px;">
+                        @using (Html.BeginForm("View", "Books", FormMethod.Get))
+                        {
+
+                            @Html.TextBox("search")
+                            <input type="submit" value="Search" class="btn btn-success btn-sm" />
+                        }
+                    </li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")
