@@ -12,22 +12,26 @@
 
 
 @*@model IEnumerable<BookStore.Models.Book>
-@Html.DropDownList("CagegoryId", ViewBag.CagegoryId as SelectList)*@
+    @Html.DropDownList("CagegoryId", ViewBag.CagegoryId as SelectList)*@
 
 
 
 <br />
-@{
-
-    foreach (var item in Model)
+@{using (Html.BeginForm("View", "Books", FormMethod.Get))
     {
+        foreach (var item in Model)
+        {
 
-        <button type="button" class="btn btn-success">
-            @Html.DisplayFor(modelItem => item.Category.NameCategory)
-        </button>
+            <button type="button" class="btn btn-success" @*onclick="lacation.href='@Url.Action("View","Books")'"*@>
+                @Html.DisplayFor(modelItem => item.Category.NameCategory)
+                
+            </button>
 
 
+        }
     }
+
+
 }
 <br /><br />
 <table class="table">
@@ -73,7 +77,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td class="col-md-2">
-                @Html.DisplayFor(modelItem => item.Category)
+                @Html.DisplayFor(modelItem => item.Author)
             </td>
             <td class="col-md-4">
                 @Html.DisplayFor(modelItem => item.Description)

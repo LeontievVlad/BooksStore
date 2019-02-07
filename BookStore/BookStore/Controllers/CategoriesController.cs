@@ -19,6 +19,13 @@ namespace BookStore.Controllers
         {
             //SelectList categ = new SelectList(db.Books, "NameCategory", "NameCategory");
             //ViewBag.Books = categ;
+            //ViewBag.Category = new SelectList(db.Categories, "CategoryId", "NameCategory");
+
+            return View(db.Categories.ToList());
+        }
+
+        public ActionResult AllCategories()
+        {
             return View(db.Categories.ToList());
         }
 

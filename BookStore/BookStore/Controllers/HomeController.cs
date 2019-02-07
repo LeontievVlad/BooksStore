@@ -14,7 +14,7 @@ namespace BookStore.Controllers
         {
             
 
-            return View();
+            return RedirectToAction("../Books/View");
         }
 
         

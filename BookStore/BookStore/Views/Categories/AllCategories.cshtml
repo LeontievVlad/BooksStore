@@ -1,0 +1,25 @@
+﻿@model IEnumerable<BookStore.Models.Category>
+
+@{
+    ViewBag.Title = "AllCategories";
+}
+
+<h2>AllCategories</h2>
+
+
+<table class="table">
+   
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href="/Books/View">
+
+                @Html.DisplayFor(modelItem => item.NameCategory)
+
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

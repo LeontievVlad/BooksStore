@@ -28,8 +28,8 @@ namespace BookStore.Controllers
         public ActionResult View(string search, int? page)
         {
             //dropdownlist for categories
-            SelectList categ = new SelectList(db.Categories, "NameCategory", "NameCategory");
-            ViewBag.Books = categ;
+            //SelectList categ = new SelectList(db.Categories, "NameCategory", "NameCategory");
+            //ViewBag.Books = categ;
             //var books = db.Books.Include(b => b.Category);
             int pageSize = 3;
             int pageNumber = (page ?? 1);
@@ -44,6 +44,7 @@ namespace BookStore.Controllers
             {
                 books = db.Books.Where(x => x.Title.Contains(search))
                     .OrderBy(x => x.Title).ToPagedList(pageNumber, pageSize);
+
                 return View(books);
             }
 
@@ -55,6 +56,8 @@ namespace BookStore.Controllers
             //return View(books.ToList());
             //return View(books);
         }
+
+        
 
 
         // GET: Books/Details/5
