@@ -6,33 +6,20 @@
 @model PagedList.IPagedList<Book>
 
 
+
 @{
     ViewBag.Title = "View";
 }
 
+ 
+@*@Html.BeginForm("View", "Books", FormMethod.Post)*@
 
-@*@model IEnumerable<BookStore.Models.Book>
-    @Html.DropDownList("CagegoryId", ViewBag.CagegoryId as SelectList)*@
-
-
-
-<br />
-@{using (Html.BeginForm("View", "Books", FormMethod.Get))
-    {
-        foreach (var item in Model)
-        {
-
-            <button type="button" class="btn btn-success" @*onclick="lacation.href='@Url.Action("View","Books")'"*@>
-                @Html.DisplayFor(modelItem => item.Category.NameCategory)
-                
-            </button>
+    @Html.DropDownList("catname", ViewBag.catname as SelectList, "All Categories")
+           <input type="submit" value="go"/>
 
 
-        }
-    }
 
 
-}
 <br /><br />
 <table class="table">
     <tr>
@@ -97,7 +84,18 @@
 </table>
 
 
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@*@using (Html.BeginForm("View", "Books", FormMethod.Post))
+{
+    foreach (var item in Model)
+    {
+        <button type="button" name="catname" class="btn btn-success">
+            @Html.DisplayFor(modelItem => item.Category.NameCategory)
+        </button>
+    }
+}*@
+
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
     @Html.PagedListPager(Model, page => Url.Action("View", new { page }))
 

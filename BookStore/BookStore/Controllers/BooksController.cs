@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using BookStore.Models;
 using PagedList;
 
@@ -21,20 +22,23 @@ namespace BookStore.Controllers
         public ActionResult Index()
         {
             var books = db.Books.Include(b => b.Category);
-            
+            //ViewBag.catname = new SelectList(db.Categories, "CategoryId", "NameCategory");
             return View(books.ToList());
         }
 
+        [HttpGet]
         public ActionResult View(string search, int? page)
         {
             //dropdownlist for categories
             //SelectList categ = new SelectList(db.Categories, "NameCategory", "NameCategory");
             //ViewBag.Books = categ;
             //var books = db.Books.Include(b => b.Category);
+            //ViewBag.catname = new SelectList(db.Categories, "CategoryId", "NameCategory");
+            ViewBag.catname = new SelectList(db.Categories, "CategoryId", "NameCategory");
             int pageSize = 3;
             int pageNumber = (page ?? 1);
             var books = db.Books.Include(b => b.Category).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
-
+           
             if (search == "" || search == null)
             {
                 
@@ -55,6 +59,18 @@ namespace BookStore.Controllers
             //return View(books.ToList().ToPagedList(pageNumber, pageSize));
             //return View(books.ToList());
             //return View(books);
+        }
+
+        [HttpPost]
+        public ActionResult View(int catname)
+        {
+            //var books = db.Books.Include(b => b.cat);
+            //books = db.Books.Where(x => x.Category.Contains(cat)).ToList();
+            //var books = db.Books.Include(b => b.Category);
+            //var books = db.Books.Include(b => b.Category).Where(x => x.CategoryId == catname).OrderBy(x => x.Title);
+            var books = db.Books.Include(b => b.Category).Where(x => x.CategoryId == catname);
+            //books = db.Books.Where(x => x.CategoryId == catname);
+            return View(books);
         }
 
         
@@ -80,7 +96,7 @@ namespace BookStore.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "NameCategory");
-            return base.View();
+            return View();
         }
 
         // POST: Books/Create

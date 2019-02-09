@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookStore.Models.Category>
+﻿@*@model IEnumerable<BookStore.Models.Category>*@
 
 @{
     ViewBag.Title = "AllCategories";
@@ -6,20 +6,43 @@
 
 <h2>AllCategories</h2>
 
+@*@Html.DropDownList("catname", ViewBag.catname as SelectList, "Select Category", new { style="width: 150px"})*@
 
-<table class="table">
-   
+@*@{ 
+using (Html.BeginForm("AllCategories", "Categories", FormMethod.Post))
+{
+    <select style="margin: 10px;">
+        <option>All Categories</option>
+        @foreach (var item in Model)
+        {
+            <option name="category">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            <a href="/Books/View">
+                @Html.DisplayFor(ModelItem => item.NameCategory)
 
-                @Html.DisplayFor(modelItem => item.NameCategory)
-
-            </a>
-        </td>
-    </tr>
+            </option>
+        }
+    </select>
+    
 }
+}*@
 
-</table>
+
+@*<table class="table">
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="/Books/View">
+
+                    @Html.DisplayFor(modelItem => item.NameCategory)
+
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>*@
+
+
