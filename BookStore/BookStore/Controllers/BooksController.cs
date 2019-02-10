@@ -38,7 +38,8 @@ namespace BookStore.Controllers
             int pageSize = 3;
             int pageNumber = (page ?? 1);
             var books = db.Books.Include(b => b.Category).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
-           
+
+            
             if (search == "" || search == null)
             {
                 
@@ -62,18 +63,31 @@ namespace BookStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult View(int catname)
+        public ActionResult View(int catname, int? page)
         {
-            //var books = db.Books.Include(b => b.cat);
-            //books = db.Books.Where(x => x.Category.Contains(cat)).ToList();
-            //var books = db.Books.Include(b => b.Category);
-            //var books = db.Books.Include(b => b.Category).Where(x => x.CategoryId == catname).OrderBy(x => x.Title);
-            var books = db.Books.Include(b => b.Category).Where(x => x.CategoryId == catname);
-            //books = db.Books.Where(x => x.CategoryId == catname);
-            return View(books);
+            ViewBag.catname = new SelectList(db.Categories, "CategoryId", "NameCategory");
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            var books = db.Books.Include(b => b.Category).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
+            
+            //var books = db.Books.Include(b => b.Category).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
+
+            if (catname > 0)
+            {
+
+                books = db.Books.Include(b => b.Category).Where(x => x.CategoryId == catname).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
+                return View(books);
+
+            }
+            else
+            {
+                return View(books);
+
+            }
         }
 
-        
+     
 
 
         // GET: Books/Details/5
@@ -106,12 +120,12 @@ namespace BookStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,Author,Description,Price,ImagePath,ImageFile,CategoryId")] Book book)
         {
-            if (book.ImagePath == null)
-            {
-                book.ImagePath = "";
-            }
-            else
-            {
+            //if (book.ImagePath == null)
+            //{
+            //    book.ImagePath = "~/images/photo-1463320726281-696a485928c7.jpg";
+            //}
+
+           
 
 
                 string filename = Path.GetFileNameWithoutExtension(book.ImageFile.FileName);
@@ -120,7 +134,7 @@ namespace BookStore.Controllers
                 book.ImagePath = "~/images/" + filename;
                 filename = Path.Combine(Server.MapPath("~/images/"), filename);
                 book.ImageFile.SaveAs(filename);
-            }
+            
             if (ModelState.IsValid)
             {
                 db.Books.Add(book);
@@ -155,12 +169,16 @@ namespace BookStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title,Author,Description,Price,ImagePath,ImageFile,CategoryId")] Book book)
         {
+
+                
             string filename = Path.GetFileNameWithoutExtension(book.ImageFile.FileName);
             string extension = Path.GetExtension(book.ImageFile.FileName);
             filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
             book.ImagePath = "~/images/" + filename;
             filename = Path.Combine(Server.MapPath("~/images/"), filename);
+                
             book.ImageFile.SaveAs(filename);
+
 
             if (ModelState.IsValid)
             {

@@ -6,7 +6,8 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-   
+    
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,24 +24,9 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Books", "Index", "Books")</li>
                     <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
-                    
-                    @*<li>@Html.DropDownList("catname", ViewBag.catname as SelectList, "All Categories", FormMethod.Post)</li>*@
-                    @*<li>
-                        @{ @model IEnumerable<BookStore.Models.Category>
-                        using (Html.BeginForm("AllCategories", "Categories", FormMethod.Post))
-                        {
-                            <select style="margin: 11px;">
-                                <option>All Categories</option>
-                                @foreach (var item in Model)
-                                {
-                                    <option>@Html.DisplayFor(ModelItem => item.NameCategory)</option>
-                                }
-                            </select>
-                        }
-                        }
 
-                    </li>*@
-                    
+
+
                     <li style="margin: 11px 0 0 50px;">
 
                         @using (Html.BeginForm("View", "Books", FormMethod.Get))
@@ -49,6 +35,10 @@
                             @Html.TextBox("search")
                             <input type="submit" value="Search" class="btn btn-success btn-sm" />
                         }
+                    </li>
+                    <li>
+                        
+                    @Html.ActionLink("Cart", "View", "Books")
                     </li>
 
                 </ul>

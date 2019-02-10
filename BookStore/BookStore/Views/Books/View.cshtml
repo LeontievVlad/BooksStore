@@ -8,23 +8,29 @@
 
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Book Store";
 }
 
- 
-@*@Html.BeginForm("View", "Books", FormMethod.Post)*@
 
-    @Html.DropDownList("catname", ViewBag.catname as SelectList, "All Categories")
-           <input type="submit" value="go"/>
+@*@Html.DropDownList("catname", ViewBag.catname as SelectList, "All Categories", new { onchange = "l" })*@
 
 
+@using (Html.BeginForm("View", "Books", FormMethod.Post))
+{
+
+    @Html.DropDownList("catname", ViewBag.catname as SelectList, "All Categories", new { onchange = "this.form.submit();" })
+
+}
 
 
 <br /><br />
 <table class="table">
     <tr>
+
+
         <th class="col-md-2">
             @*@Html.DisplayNameFor(model => model.ImagePath)*@
+            Books
         </th>
         <th class="col-md-1">
             @*@Html.DisplayNameFor(model => model.Category.NameCategory)*@
@@ -46,8 +52,9 @@
             @*@Html.DisplayNameFor(model => model.Price) &#8372;*@
             Price &#8372;
         </th>
-
         <th></th>
+
+
     </tr>
 
     @foreach (var item in Model)
@@ -85,20 +92,22 @@
 
 
 @*@using (Html.BeginForm("View", "Books", FormMethod.Post))
-{
-    foreach (var item in Model)
     {
-        <button type="button" name="catname" class="btn btn-success">
-            @Html.DisplayFor(modelItem => item.Category.NameCategory)
-        </button>
-    }
-}*@
-
-
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        foreach (var item in Model)
+        {
+            <button type="button" name="catname" class="btn btn-success">
+                @Html.DisplayFor(modelItem => item.Category.NameCategory)
+            </button>
+        }
+    }*@
+<div class="bfot">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
     @Html.PagedListPager(Model, page => Url.Action("View", new { page }))
 
-    @*<a href="/Books/Index">
-           <button type="button" class="btn btn-success btn-lg">End test</button>
-        </a>*@
+</div>
+
+
+@*<a href="/Books/Index">
+       <button type="button" class="btn btn-success btn-lg">End test</button>
+    </a>*@
