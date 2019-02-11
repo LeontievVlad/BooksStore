@@ -24,6 +24,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Books", "Index", "Books")</li>
                     <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+                    <li>@Html.ActionLink("Cart", "Index", "Carts")</li>
 
 
 
@@ -36,10 +37,7 @@
                             <input type="submit" value="Search" class="btn btn-success btn-sm" />
                         }
                     </li>
-                    <li>
-                        
-                    @Html.ActionLink("Cart", "View", "Books")
-                    </li>
+
 
                 </ul>
                 @Html.Partial("_LoginPartial")

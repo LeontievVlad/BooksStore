@@ -73,7 +73,7 @@ namespace BookStore.Controllers
             
             //var books = db.Books.Include(b => b.Category).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
 
-            if (catname > 0)
+            if (catname != 15)
             {
 
                 books = db.Books.Include(b => b.Category).Where(x => x.CategoryId == catname).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
@@ -82,13 +82,14 @@ namespace BookStore.Controllers
             }
             else
             {
-                return View(books);
-
+                return RedirectToAction("View", "Books");
             }
         }
 
-     
+        
+   
 
+       
 
         // GET: Books/Details/5
         public ActionResult Details(int? id)
