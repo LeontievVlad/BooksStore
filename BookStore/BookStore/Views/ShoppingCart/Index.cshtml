@@ -1,0 +1,115 @@
+﻿@using BookStore.Models;
+@{
+    ViewBag.Title = "Cart";
+}
+
+<h2>Your Cart</h2>
+
+@{
+    if (Session["Cart"] != null)
+    {
+        using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
+        {
+            <table class="table">
+                <tr>
+                    <td></td>
+                    <td>
+                        Title
+                    </td>
+                    <td>
+                        Author
+                    </td>
+                    <td>
+                        Price
+                    </td>
+                    <td>
+                        Quantity
+                    </td>
+                    <td>
+                        Sub Total
+                    </td>
+                    <td></td>
+                </tr>
+                @foreach (var cart in (List<Cart>)Session["Cart"])
+                {
+                <tr>
+                    <td>
+                        <img src="@Url.Content(cart.Book.ImagePath) " width="150" height="100" />
+                    </td>
+                    <td>
+                        @cart.Book.Title
+                    </td>
+                    <td>
+                        @cart.Book.Author
+                    </td>
+                    <td>
+                        @cart.Book.Price
+                    </td>
+                    <td>
+                        @*@cart.Quantity*@
+                        <input type="number" min="1" name="quantity" id="quantity" value="@cart.Quantity" />
+                        @*&nbsp;<span id="errmsg"></span>*@
+                    </td>
+                    <td>
+                        @(String.Format("{0:N0}", cart.Book.Price * cart.Quantity))
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteCart", "ShoppingCart", new { id = cart.Book.BookId },
+                       new { @class = "btn btn-danger" })
+                        @*new { onclick="return confirm ('Are you sure?');"}*@
+                    </td>
+                </tr>
+                }
+                <tr>
+                    <td colspan="4"><h4>Total:</h4></td>
+                    <td>
+                        @{
+                            List<Cart> temp = (List<Cart>)Session["Cart"];
+                            var total = String.Format("{0:N0}", temp.Sum(x => x.Quantity * x.Book.Price));
+
+                        }
+                        @total  &#8372;
+                        
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+            <hr />
+            <br />
+            <center>
+                <input type="submit" value="Update Cart" class="btn btn-primary" />
+                @Html.ActionLink("Continue Shopping", "View", "Books", null, new { @class = "btn btn-success" })
+                @Html.ActionLink("Buy", "ProfBook", "ShoppingCart", null, new { @class = "btn btn-success" })
+
+                @*<a href="/Books/View" class="btn btn-success">Continue Shopping</a>*@
+            </center>
+                
+            
+            
+
+        }
+
+    }
+    else
+    {
+        <h4> No books in your cart!!!</h4 >
+    }
+
+
+}
+
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            //called when key is pressed in textbox
+            $("#quantity").key(function (e) {
+                //is not digit
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                    //display error message
+                    $("#errmsg").html("Enter digits only!").show().fadeOut.("slow");
+                    return false;
+                }
+            });
+        });
+
+
+    </script>*@

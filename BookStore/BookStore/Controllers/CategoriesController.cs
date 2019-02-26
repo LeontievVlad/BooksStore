@@ -7,44 +7,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BookStore.Models;
-//using Dropdown_bind_MVC.Models;
 
 namespace BookStore.Controllers
 {
     public class CategoriesController : Controller
     {
-        private BookContext db = new BookContext();
+        private BookStoreContext db = new BookStoreContext();
 
         // GET: Categories
         public ActionResult Index()
         {
-            
-            //SelectList categ = new SelectList(db.Books, "NameCategory", "NameCategory");
-            //ViewBag.Books = categ;
-            //ViewBag.Category = new SelectList(db.Categories, "CategoryId", "NameCategory");
-
             return View(db.Categories.ToList());
         }
-
-        public ActionResult AllCategories()
-        {
-            
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult AllCategories(string category)
-        {
-
-            return View(db.Categories.ToList());
-        }
-
-        
 
         // GET: Categories/Details/5
         public ActionResult Details(int? id)
         {
-            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -60,7 +38,6 @@ namespace BookStore.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-            
             return View();
         }
 
@@ -84,7 +61,6 @@ namespace BookStore.Controllers
         // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
         {
-            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -116,8 +92,6 @@ namespace BookStore.Controllers
         // GET: Categories/Delete/5
         public ActionResult Delete(int? id)
         {
-            
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -135,7 +109,6 @@ namespace BookStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            
             Category category = db.Categories.Find(id);
             db.Categories.Remove(category);
             db.SaveChanges();

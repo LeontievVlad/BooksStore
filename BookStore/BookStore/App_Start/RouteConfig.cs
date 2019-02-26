@@ -16,7 +16,7 @@ namespace BookStore
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "View", action = "Books", id = UrlParameter.Optional }
+                defaults: new { controller = "Books", action = "View", id = UrlParameter.Optional }
             );
         }
     }

@@ -10,8 +10,6 @@ namespace BookStore.Models
     {
         public int CategoryId { get; set; }
         public string NameCategory { get; set; }
-
         public virtual IPagedList<Book> Books { get; set; }
-        
     }
 }

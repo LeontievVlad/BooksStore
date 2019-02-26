@@ -8,7 +8,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{84C5FF54-385B-4AE1-BF0E-F47F977AB1C3}</ProjectGuid>
+    <ProjectGuid>{316DDFA7-B249-40F7-8343-60A890EFDC7D}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -55,6 +55,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -179,46 +181,88 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
-    <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902050925546_InitialCreate.cs" />
-    <Compile Include="Migrations\201902050925546_InitialCreate.Designer.cs">
-      <DependentUpon>201902050925546_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201902191642367_InitialCreate.cs" />
+    <Compile Include="Migrations\201902191642367_InitialCreate.Designer.cs">
+      <DependentUpon>201902191642367_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902110932282_MyFirst.cs" />
-    <Compile Include="Migrations\201902110932282_MyFirst.Designer.cs">
-      <DependentUpon>201902110932282_MyFirst.cs</DependentUpon>
+    <Compile Include="Migrations\201902221829218_BookAndCategory.cs" />
+    <Compile Include="Migrations\201902221829218_BookAndCategory.Designer.cs">
+      <DependentUpon>201902221829218_BookAndCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902111940239_cart.cs" />
-    <Compile Include="Migrations\201902111940239_cart.Designer.cs">
-      <DependentUpon>201902111940239_cart.cs</DependentUpon>
+    <Compile Include="Migrations\201902221914242_AddOrder.cs" />
+    <Compile Include="Migrations\201902221914242_AddOrder.Designer.cs">
+      <DependentUpon>201902221914242_AddOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902112006521_Cart1.cs" />
-    <Compile Include="Migrations\201902112006521_Cart1.Designer.cs">
-      <DependentUpon>201902112006521_Cart1.cs</DependentUpon>
+    <Compile Include="Migrations\201902221957096_AddOrderModel.cs" />
+    <Compile Include="Migrations\201902221957096_AddOrderModel.Designer.cs">
+      <DependentUpon>201902221957096_AddOrderModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902112010217_CartIE.cs" />
-    <Compile Include="Migrations\201902112010217_CartIE.Designer.cs">
-      <DependentUpon>201902112010217_CartIE.cs</DependentUpon>
+    <Compile Include="Migrations\201902231746029_FirstValidation.cs" />
+    <Compile Include="Migrations\201902231746029_FirstValidation.Designer.cs">
+      <DependentUpon>201902231746029_FirstValidation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902112036387_NewCart.cs" />
-    <Compile Include="Migrations\201902112036387_NewCart.Designer.cs">
-      <DependentUpon>201902112036387_NewCart.cs</DependentUpon>
+    <Compile Include="Migrations\201902231824549_SecondValidation.cs" />
+    <Compile Include="Migrations\201902231824549_SecondValidation.Designer.cs">
+      <DependentUpon>201902231824549_SecondValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902250841082_ThirdValidation.cs" />
+    <Compile Include="Migrations\201902250841082_ThirdValidation.Designer.cs">
+      <DependentUpon>201902250841082_ThirdValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902250909108_FourthValidation.cs" />
+    <Compile Include="Migrations\201902250909108_FourthValidation.Designer.cs">
+      <DependentUpon>201902250909108_FourthValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902250915336_FifthValidation.cs" />
+    <Compile Include="Migrations\201902250915336_FifthValidation.Designer.cs">
+      <DependentUpon>201902250915336_FifthValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902250931428_SixthValidation.cs" />
+    <Compile Include="Migrations\201902250931428_SixthValidation.Designer.cs">
+      <DependentUpon>201902250931428_SixthValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902250935035_Validation.cs" />
+    <Compile Include="Migrations\201902250935035_Validation.Designer.cs">
+      <DependentUpon>201902250935035_Validation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902250938425_ReqValid.cs" />
+    <Compile Include="Migrations\201902250938425_ReqValid.Designer.cs">
+      <DependentUpon>201902250938425_ReqValid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902250942164_WReqValid.cs" />
+    <Compile Include="Migrations\201902250942164_WReqValid.Designer.cs">
+      <DependentUpon>201902250942164_WReqValid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902250958246_ReqTrueValid.cs" />
+    <Compile Include="Migrations\201902250958246_ReqTrueValid.Designer.cs">
+      <DependentUpon>201902250958246_ReqTrueValid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902251011350_NotReqVal.cs" />
+    <Compile Include="Migrations\201902251011350_NotReqVal.Designer.cs">
+      <DependentUpon>201902251011350_NotReqVal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902251018288_CusName.cs" />
+    <Compile Include="Migrations\201902251018288_CusName.Designer.cs">
+      <DependentUpon>201902251018288_CusName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
-    <Compile Include="Models\BookContext.cs" />
+    <Compile Include="Models\BookStoreContext.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -234,6 +278,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -245,9 +290,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -278,27 +321,30 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Categories\Create.cshtml" />
-    <Content Include="Views\Categories\Delete.cshtml" />
-    <Content Include="Views\Categories\Details.cshtml" />
-    <Content Include="Views\Categories\Edit.cshtml" />
-    <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Books\Create.cshtml" />
     <Content Include="Views\Books\Delete.cshtml" />
     <Content Include="Views\Books\Details.cshtml" />
     <Content Include="Views\Books\Edit.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Books\View.cshtml" />
-    <Content Include="Views\Categories\AllCategories.cshtml" />
-    <Content Include="Views\Carts\Create.cshtml" />
-    <Content Include="Views\Carts\Delete.cshtml" />
-    <Content Include="Views\Carts\Details.cshtml" />
-    <Content Include="Views\Carts\Edit.cshtml" />
-    <Content Include="Views\Carts\Index.cshtml" />
-    <Content Include="Views\Carts\AddCart.cshtml" />
+    <Content Include="Views\Books\YourInfo.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\OrderSuccess.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
+    <Content Include="Views\ShoppingCart\Sent.cshtml" />
+    <Content Include="Views\ShoppingCart\Contact.cshtml" />
+    <Content Include="Views\ShoppingCart\ProfBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>
@@ -315,23 +361,56 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201902050925546_InitialCreate.resx">
-      <DependentUpon>201902050925546_InitialCreate.cs</DependentUpon>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201902191642367_InitialCreate.resx">
+      <DependentUpon>201902191642367_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902110932282_MyFirst.resx">
-      <DependentUpon>201902110932282_MyFirst.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902221829218_BookAndCategory.resx">
+      <DependentUpon>201902221829218_BookAndCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902111940239_cart.resx">
-      <DependentUpon>201902111940239_cart.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902221914242_AddOrder.resx">
+      <DependentUpon>201902221914242_AddOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902112006521_Cart1.resx">
-      <DependentUpon>201902112006521_Cart1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902221957096_AddOrderModel.resx">
+      <DependentUpon>201902221957096_AddOrderModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902112010217_CartIE.resx">
-      <DependentUpon>201902112010217_CartIE.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902231746029_FirstValidation.resx">
+      <DependentUpon>201902231746029_FirstValidation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902112036387_NewCart.resx">
-      <DependentUpon>201902112036387_NewCart.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902231824549_SecondValidation.resx">
+      <DependentUpon>201902231824549_SecondValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902250841082_ThirdValidation.resx">
+      <DependentUpon>201902250841082_ThirdValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902250909108_FourthValidation.resx">
+      <DependentUpon>201902250909108_FourthValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902250915336_FifthValidation.resx">
+      <DependentUpon>201902250915336_FifthValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902250931428_SixthValidation.resx">
+      <DependentUpon>201902250931428_SixthValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902250935035_Validation.resx">
+      <DependentUpon>201902250935035_Validation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902250938425_ReqValid.resx">
+      <DependentUpon>201902250938425_ReqValid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902250942164_WReqValid.resx">
+      <DependentUpon>201902250942164_WReqValid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902250958246_ReqTrueValid.resx">
+      <DependentUpon>201902250958246_ReqTrueValid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902251011350_NotReqVal.resx">
+      <DependentUpon>201902251011350_NotReqVal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902251018288_CusName.resx">
+      <DependentUpon>201902251018288_CusName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -350,9 +429,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2821</DevelopmentServerPort>
+          <DevelopmentServerPort>3066</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2821/</IISUrl>
+          <IISUrl>http://localhost:3066/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

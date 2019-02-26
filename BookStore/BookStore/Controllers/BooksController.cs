@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Html;
 using BookStore.Models;
 using PagedList;
 
@@ -15,34 +14,41 @@ namespace BookStore.Controllers
 {
     public class BooksController : Controller
     {
-        private BookContext db = new BookContext();
+        private BookStoreContext db = new BookStoreContext();
 
         // GET: Books
-        
         public ActionResult Index()
         {
             var books = db.Books.Include(b => b.Category);
-            //ViewBag.catname = new SelectList(db.Categories, "CategoryId", "NameCategory");
             return View(books.ToList());
         }
 
+        //Get: Your Information
+        public string YourInfo()
+        {
+            string browser = HttpContext.Request.Browser.Browser;
+            string user_agent = HttpContext.Request.UserAgent;
+            string url = HttpContext.Request.RawUrl;
+            string ip = HttpContext.Request.UserHostAddress;
+            string referrer = HttpContext.Request.UrlReferrer == null ? "" : HttpContext.Request.UrlReferrer.AbsoluteUri;
+            return "<p>Browser: " + browser + "</p><p>User-Agent: " + user_agent + "</p><p>Url запроса: " + url +
+                "</p><p>Реферер: " + referrer + "</p><p>IP-адрес: " + ip + "</p>";
+        }
+
+        // Get: View
         [HttpGet]
         public ActionResult View(string search, int? page)
         {
-            //dropdownlist for categories
-            //SelectList categ = new SelectList(db.Categories, "NameCategory", "NameCategory");
-            //ViewBag.Books = categ;
-            //var books = db.Books.Include(b => b.Category);
-            //ViewBag.catname = new SelectList(db.Categories, "CategoryId", "NameCategory");
+            
             ViewBag.catname = new SelectList(db.Categories, "CategoryId", "NameCategory");
             int pageSize = 3;
             int pageNumber = (page ?? 1);
-            var books = db.Books.Include(b => b.Category).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
+            var books = db.Books.Include(b => b.Category).OrderBy(x => x.BookId).ToPagedList(pageNumber, pageSize);
 
-            
+
             if (search == "" || search == null)
             {
-                
+
                 return View(books);
             }
             else
@@ -53,13 +59,11 @@ namespace BookStore.Controllers
                 return View(books);
             }
 
+
+
+
+
             
-
-
-
-            //return View(books.ToList().ToPagedList(pageNumber, pageSize));
-            //return View(books.ToList());
-            //return View(books);
         }
 
         [HttpPost]
@@ -69,14 +73,13 @@ namespace BookStore.Controllers
 
             int pageSize = 3;
             int pageNumber = (page ?? 1);
-            var books = db.Books.Include(b => b.Category).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
-            
-            //var books = db.Books.Include(b => b.Category).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
+            var books = db.Books.Include(b => b.Category).OrderBy(x => x.BookId).ToPagedList(pageNumber, pageSize);
 
-            if (catname != 15)
+
+            if (catname > 1)
             {
 
-                books = db.Books.Include(b => b.Category).Where(x => x.CategoryId == catname).OrderBy(x => x.Id).ToPagedList(pageNumber, pageSize);
+                books = db.Books.Include(b => b.Category).Where(x => x.CategoryId == catname).OrderBy(x => x.BookId).ToPagedList(pageNumber, pageSize);
                 return View(books);
 
             }
@@ -85,11 +88,6 @@ namespace BookStore.Controllers
                 return RedirectToAction("View", "Books");
             }
         }
-
-        
-   
-
-       
 
         // GET: Books/Details/5
         public ActionResult Details(int? id)
@@ -103,7 +101,6 @@ namespace BookStore.Controllers
             {
                 return HttpNotFound();
             }
-
             return View(book);
         }
 
@@ -119,23 +116,15 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Author,Description,Price,ImagePath,ImageFile,CategoryId")] Book book)
+        public ActionResult Create([Bind(Include = "BookId,Title,Author,Desription,Price,ImagePath,ImageFile,CategoryId")] Book book)
         {
-            //if (book.ImagePath == null)
-            //{
-            //    book.ImagePath = "~/images/photo-1463320726281-696a485928c7.jpg";
-            //}
+            string filename = Path.GetFileNameWithoutExtension(book.ImageFile.FileName);
+            string extension = Path.GetExtension(book.ImageFile.FileName);
+            filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
+            book.ImagePath = "~/images/" + filename;
+            filename = Path.Combine(Server.MapPath("~/images/"), filename);
+            book.ImageFile.SaveAs(filename);
 
-           
-
-
-                string filename = Path.GetFileNameWithoutExtension(book.ImageFile.FileName);
-                string extension = Path.GetExtension(book.ImageFile.FileName);
-                filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
-                book.ImagePath = "~/images/" + filename;
-                filename = Path.Combine(Server.MapPath("~/images/"), filename);
-                book.ImageFile.SaveAs(filename);
-            
             if (ModelState.IsValid)
             {
                 db.Books.Add(book);
@@ -168,18 +157,15 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Author,Description,Price,ImagePath,ImageFile,CategoryId")] Book book)
+        public ActionResult Edit([Bind(Include = "BookId,Title,Author,Desription,Price,ImagePath,ImageFile,CategoryId")] Book book)
         {
-
-                
             string filename = Path.GetFileNameWithoutExtension(book.ImageFile.FileName);
             string extension = Path.GetExtension(book.ImageFile.FileName);
             filename = filename + DateTime.Now.ToString("yymmssfff") + extension;
             book.ImagePath = "~/images/" + filename;
             filename = Path.Combine(Server.MapPath("~/images/"), filename);
-                
-            book.ImageFile.SaveAs(filename);
 
+            book.ImageFile.SaveAs(filename);
 
             if (ModelState.IsValid)
             {
@@ -211,14 +197,8 @@ namespace BookStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            
             Book book = db.Books.Find(id);
-            /////
-            /////delete image from folder images
-            System.IO.File.Delete(Server.MapPath(book.ImagePath));
-            /////
             db.Books.Remove(book);
-            
             db.SaveChanges();
             return RedirectToAction("Index");
         }

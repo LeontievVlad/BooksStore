@@ -1,13 +1,10 @@
-﻿@*@using System.Web.Mvc.WebViewPage<SelectList<BookStore.Models.Category>>*@
-@model IEnumerable<BookStore.Models.Category>
+﻿@model IEnumerable<BookStore.Models.Category>
 
 @{
-    ViewBag.Title = "Categories";
+    ViewBag.Title = "Index";
 }
 
-@*@Html.DropDownList("NameCategory", ViewBag.NameCategory as SelectList)*@
-
-@*@Html.DropDownList("CategoryId", "NameCategory")*@
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")

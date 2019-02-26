@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     
@@ -22,13 +22,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Books", "Index", "Books")</li>
-                    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
-                    <li>@Html.ActionLink("Cart", "Index", "Carts")</li>
-
-
-
-                    <li style="margin: 11px 0 0 50px;">
+                    <li>@Html.ActionLink("Book", "Index", "Books")</li>
+                    <li>@Html.ActionLink("Category", "Index", "Categories")</li>
+                   
+                    <li style="margin: 11px 50px 0 50px;">
 
                         @using (Html.BeginForm("View", "Books", FormMethod.Get))
                         {
@@ -37,24 +34,19 @@
                             <input type="submit" value="Search" class="btn btn-success btn-sm" />
                         }
                     </li>
-
-
+                    <li style="margin-left: 450px; font-size: 1.2em;">
+                        @Html.ActionLink("Cart", "Index", "ShoppingCart")
+                    </li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                @*@Html.Partial("_LoginPartial")*@
             </div>
         </div>
     </div>
     <div class="container body-content">
-        
-
-
-           
-
-
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Book Store</p>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
 

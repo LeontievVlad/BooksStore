@@ -7,10 +7,13 @@ namespace BookStore.Models
 {
     public class Cart
     {
-        public int CartID { get; set; }
-        
-        public decimal SumCart { get; set; }
-        public int BookId { get; set; }
-        public virtual Book Book { get; set; }
+        public Book Book { get; set; }
+        public int Quantity { get; set; }
+
+        public Cart(Book book, int quantity)
+        {
+            Book = book;
+            Quantity = quantity;
+        }
     }
 }

@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title.</h2>
+
+<a class="btn btn-danger" onclick="SendEmail()">Click to Send Email</a>
+
+
+
+<script>
+    var SendEmail = function () {
+        $.ajax({
+            type: "Post",
+            url: "/ShoppingCart/SendMailToUser",
+            success: function (data) {
+                alert("Success");
+            }
+        })
+    }
+</script>

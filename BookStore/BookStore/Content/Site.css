@@ -1,8 +1,6 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    max-width: 100%;
-    background-color: #eaeaea;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -25,12 +23,43 @@ textarea {
     max-width: 280px;
 }
 
-#catname {
-    
-    margin-top: 11px;
-    padding: 2px;
+#quantity {
     border-radius: 5px;
-    color: white;
-    background-color: #5cb85c;
+    padding: 2px;
+    text-align: center;
+    width: 100px;
     border-color: #4cae4c;
+    background-color: white;
+}
+
+#catname {
+    text-decoration: none;
+    border-radius: 5px 10px;
+    padding: 5px;
+    color: #fff;
+    /*background-color: #5cb85c;
+    border-color: #4cae4c;*/
+    cursor: pointer;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.myForm {
+    width: 100%;
+}
+.myForm p, .myForm input {
+    
+    width: 40%;
+    margin-left: 40%;
+    font-size: 1.2em;
+}
+
+.myForm p {
+    margin-top: 10px;
+    
+}
+
+.myForm input {
+    border-radius: 5px;
+    
 }

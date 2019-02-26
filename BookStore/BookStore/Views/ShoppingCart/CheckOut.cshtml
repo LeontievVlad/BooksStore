@@ -1,0 +1,95 @@
+﻿@using BookStore.Models;
+@{
+    ViewBag.Title = "Cart";
+}
+
+
+<h2>Check Out</h2>
+
+
+@{
+    if (Session["Cart"] != null)
+    {
+
+        <table class="table">
+            <tr>
+                <td></td>
+                <td>
+                    Title
+                </td>
+                <td>
+                    Author
+                </td>
+                <td>
+                    Price
+                </td>
+                <td>
+                    Quantity
+                </td>
+
+            </tr>
+            @foreach (var cart in (List<Cart>)Session["Cart"])
+            {
+                <tr>
+                    <td>
+                        <img src="@Url.Content(cart.Book.ImagePath) " width="150" height="100" />
+                    </td>
+                    <td>
+                        @cart.Book.Title
+                    </td>
+                    <td>
+                        @cart.Book.Author
+                    </td>
+                    <td>
+                        @cart.Book.Price
+                    </td>
+                    <td>
+
+                        <input type="number" name="quantity" id="quantity" value="@cart.Quantity" readonly />
+
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+        <hr />
+        <br />
+
+
+
+    }
+    else
+    {
+        <h4> No books in your cart!!!</h4>
+    }
+
+
+}
+
+@using (Html.BeginForm("ProcessOrder", "ShoppingCart", FormMethod.Post, new { id = "customer-form" }))
+{
+    @*@Html.ValidationSummary();*@
+<div class="myForm">
+
+    
+        <div id="messageShow"></div>
+        <p>Enter Your Information</p>
+        <p>Name</p>
+        <input type="text" name="cusName" id="cusName" /><br />
+        <p>Phone</p>
+        <input type="text" name="cusPhone" id="cusPhone" /><br />
+        <p>Email</p>
+        <input type="text" name="cusEmail" id="cusEmail" /><br />
+        <p>Address</p>
+        <input type="text" name="cusAddress" id="cusAddress" /><br />
+        <br />
+        <input type="submit" id="done" value="Confirm" class="btn btn-success" />
+        
+    
+</div>
+    }
+
+
+
+

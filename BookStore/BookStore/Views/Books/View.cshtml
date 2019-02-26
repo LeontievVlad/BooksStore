@@ -11,19 +11,22 @@
     ViewBag.Title = "Book Store";
 }
 
+@*@Html.ActionLink("Get my info", "YourInfo", "Books")
+<br/>*@
 
 @*@Html.DropDownList("catname", ViewBag.catname as SelectList, "All Categories", new { onchange = "l" })*@
-
+<br />
 
 @using (Html.BeginForm("View", "Books", FormMethod.Post))
 {
 
-    @Html.DropDownList("catname", ViewBag.catname as SelectList, new { onchange = "this.form.submit();" })
+    @Html.DropDownList("catname", ViewBag.catname as SelectList, new { onchange = "this.form.submit();"  })
 
 }
 
 
-<br /><br />
+
+<br />
 <table class="table">
     <tr>
 
@@ -44,7 +47,7 @@
             @*@Html.DisplayNameFor(model => model.Author)*@
             Author
         </th>
-        <th class="col-md-4">
+        <th class="col-md-3">
             @*@Html.DisplayNameFor(model => model.Description)*@
             Description
         </th>
@@ -59,10 +62,12 @@
 
     @foreach (var item in Model)
     {
-        using (Html.BeginForm("AddCart", "Carts", FormMethod.Post))
-        {
+
+        //using (Html.BeginForm("AddToCart", "Profiles"))
+
             <tr>
                 <td class="col-md-2">
+                    <input type="number" name="BookId" value="@Html.DisplayFor(modelItem => item.BookId)" hidden />
                     @*@Html.DisplayFor(modelItem => item.ImagePath)*@
                     <img src="@Url.Content(item.ImagePath) " width="150" height="100" />
                 </td>
@@ -75,8 +80,8 @@
                 <td class="col-md-2">
                     @Html.DisplayFor(modelItem => item.Author)
                 </td>
-                <td class="col-md-4">
-                    @Html.DisplayFor(modelItem => item.Description)
+                <td class="col-md-3">
+                    @Html.DisplayFor(modelItem => item.Desription)
                 </td>
                 <td class="col-md-1">
                     @Html.DisplayFor(modelItem => item.Price) &#8372;
@@ -84,14 +89,18 @@
 
                 <td>
 
-                    @Html.ActionLink("Carts", "AddCart", "Carts")
+
+                    @Html.ActionLink("Add to Cart", "OrderNow", "ShoppingCart", new { id = item.BookId}, new { @class = "btn btn-success" })
+                    @*@Html.ActionLink("Index", "Carts", new { id = item.BookId })*@
+                    @*<input type="submit" value="Buy" class="btn btn-success" />*@
+
 
 
                 </td>
             </tr>
-        }
+
         
-    }
+    } 
 
 
 
@@ -107,12 +116,28 @@
             </button>
         }
     }*@
+
+
+<script type="text/css">
+
+    .pagination > li > a {
+    display: none;
+    }
+
+    .pagination > li:last-child > a {
+    display: block;
+    }
+
+</script>
+
 <div class="bfot">
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
     @Html.PagedListPager(Model, page => Url.Action("View", new { page }))
 
 </div>
+
+
 
 
 @*<a href="/Books/Index">
