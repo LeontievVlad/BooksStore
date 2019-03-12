@@ -1,4 +1,3 @@
-﻿@*@model IEnumerable<BookStore.Models.Book>*@
 
 @using BookStore.Models;
 @using PagedList.Mvc;
@@ -30,9 +29,7 @@
     }
 
     @using (Html.BeginForm("View", "Books", FormMethod.Post))
-    {
-
-        @*@Html.DropDownList("ratBook", ViewBag.ratBook as SelectList, new { onchange = "this.form.submit();" })*@
+    {  
         <input type="submit" id="BookRating" name="BookRating" value="Popular" class="btn btn-primary" />
     }
     @using (Html.BeginForm("View", "Books", FormMethod.Post))
@@ -56,25 +53,7 @@
     }
 
 </div>
-
-
-
 <br />
-@*<select>
-        @foreach (var aut in Model)
-        {
-            using (Html.BeginForm("View", "Books", FormMethod.Post))
-            {
-                <option name="aut" id="aut" value="@Html.DisplayFor(modelItem => aut.BookId)">
-                    @Html.DisplayFor(modelItem => aut.Author)
-                </option>
-
-            }
-        }
-    </select>*@
-
-
-
 @foreach (var item in Model)
 {
     <div class="wrapContent">
@@ -86,17 +65,10 @@
         <div class="myImage">
             <img src="@Url.Content(item.ImagePath)" />
         </div>
-
-
-
-
         <p>
-
-
             @{
                 int starY = (int)item.RatingBook;
                 int starN = 10 - starY;
-
             }
             @for (int i = 0; i < starY; i++)
             {
@@ -118,7 +90,6 @@
             @Html.DisplayFor(modelItem => item.Category.NameCategory)
         </p>
 
-
         <p>
             @Html.DisplayFor(modelItem => item.Price) &#8372;
         </p>
@@ -133,38 +104,7 @@
     </div>
 }
 
-
-
-
-
-
-
-
-@*@using (Html.BeginForm("View", "Books", FormMethod.Post))
-    {
-        foreach (var item in Model)
-        {
-            <button type="button" name="catname" class="btn btn-success">
-                @Html.DisplayFor(modelItem => item.Category.NameCategory)
-            </button>
-        }
-    }*@
-
-
-
-
 <div class="bfot">
-    @*<h3>
-        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-    </h3>*@ 
-
     @Html.PagedListPager(Model, page => Url.Action("View", new { page }))
-
 </div>
 
-
-
-
-@*<a href="/Books/Index">
-       <button type="button" class="btn btn-success btn-lg">End test</button>
-    </a>*@
