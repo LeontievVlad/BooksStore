@@ -1,0 +1,34 @@
+﻿
+@model BookStore.Models.Book
+
+
+
+
+@foreach (var com in Model.Comments)
+{
+
+    int starYes = (int)com.Rating;
+    int starNo = 10 - starYes;
+
+    <hr />
+    for (int i = 0; i < starYes; i++)
+    {
+        <span class="starY">
+            &#9733;&nbsp;
+        </span>
+    }
+    for (int i = 0; i < starNo; i++)
+    {
+        <span class="starY">
+            &#9734;&nbsp;
+        </span>
+    }<br />
+    @Html.DisplayFor(modelItem => com.Name)<br />
+    @Html.DisplayFor(modelItem => com.StrComment)
+
+    
+    <br /><br />
+
+
+    <hr />
+}

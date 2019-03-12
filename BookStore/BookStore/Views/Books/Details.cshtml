@@ -1,67 +1,112 @@
-﻿@model BookStore.Models.Book
+﻿
+@model BookStore.Models.Book
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Book</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.NameCategory)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category.NameCategory)
-        </dd>
+<div id="wrapdetail">
+    <h2 id="detailTitle">
+        @Html.DisplayFor(model => model.Title)
+    </h2>
+    <span id="imgdetail">
+        <img src="@Url.Content(Model.ImagePath)" />
+    </span>
+    <span id="maindetail">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-
-        <dd>
+        <br />
+        <h3>
             @Html.DisplayFor(model => model.Author)
-        </dd>
+        </h3>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Desription)
-        </dt>
+        <br />
+        <h3>
+            @Html.DisplayFor(model => model.Category.NameCategory)
+        </h3>
 
-        <dd>
-            @Html.DisplayFor(model => model.Desription)
-        </dd>
+        <br />
+        @Html.DisplayFor(model => model.Price)
+        <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+        @{
+            int starY = (int)Model.RatingBook;
+            int starN = 10 - starY;
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </dt>
+        }
+        @for (int i = 0; i < starY; i++)
+        {
+            <span class="starY">
+                &#9733;&nbsp;
+            </span>
+        }
+        @for (int i = 0; i < starN; i++)
+        {
+            <span class="starY">
+                &#9734;&nbsp;
+            </span>
+        }
 
-        <dd>
-            @*@Html.DisplayFor(model => model.ImagePath)*@
-            <img src="@Url.Content(Model.ImagePath)" width="100" height="100" />
-        </dd>
+        <br /><br /><br />
+        @Html.ActionLink("Add to Cart", "OrderNow", "ShoppingCart", new { id = Model.BookId }, new { @class = "btn btn-success" })
+    </span>
+    <span id="descdetail">
 
-    </dl>
+        @Html.DisplayFor(model => model.Desription)
+
+    </span>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.BookId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+@using (Html.BeginForm("AddComment", "Books", FormMethod.Post))
+{
+
+    <div class="rating">
+        <h3>Comments</h3>
+        <hr />
+        <p class="ratingrat">Rating(required):</p>
+
+        <input type="radio" id="star10" name="Rating" value="10" />
+        <label class="full" for="star10" title="10"></label>
+        <input type="radio" id="star9" name="Rating" value="9" />
+        <label class="full" for="star9" title="9"></label>
+        <input type="radio" id="star8" name="Rating" value="8" />
+        <label class="full" for="star8" title="8"></label>
+        <input type="radio" id="star7" name="Rating" value="7" />
+        <label class="full" for="star7" title="7"></label>
+        <input type="radio" id="star6" name="Rating" value="6" />
+        <label class="full" for="star6" title="6"></label>
+        <input type="radio" id="star5" name="Rating" value="5" />
+        <label class="full" for="star5" title="5"></label>
+        <input type="radio" id="star4" name="Rating" value="4" />
+        <label class="full" for="star4" title="4"></label>
+        <input type="radio" id="star3" name="Rating" value="3" />
+        <label class="full" for="star3" title="3"></label>
+        <input type="radio" id="star2" name="Rating" value="2" />
+        <label class="full" for="star2" title="2"></label>
+        <input type="radio" id="star1" name="Rating" value="1" required />
+        <label class="full" for="star1" title="1"></label>
+    </div>
+    <br /><br />
+    <div class="myForm">
+        <input id="BookId" name="BookId" type="number" value="@Html.DisplayFor(model => model.BookId)" hidden />
+        <p>Your name:</p>
+        <input id="Name" name="Name" type="text" min="3" required />
+        <p>Your comment:</p>
+        <input id="BCom" name="BCom" type="text" required />
+
+    </div>
+    <br />
+    <input type="submit" value="Submit" class="btn btn-success" style="width: 40%;margin-left: 40%;font-size: 1.2em;" />
+
+}
+
+
+<br /><br />
+
+@Html.Partial("_Items")

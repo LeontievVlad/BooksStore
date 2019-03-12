@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -23,6 +24,16 @@ textarea {
     max-width: 280px;
 }
 
+.myFilters {
+    float: left;
+    width: 100%;
+    background-color: #efefef;
+    border-radius: 5px;
+    padding: 10px 10px 10px 20%;
+    text-align: center;
+}
+
+
 #quantity {
     border-radius: 5px;
     padding: 2px;
@@ -31,17 +42,26 @@ textarea {
     border-color: #4cae4c;
     background-color: white;
 }
-
-#catname {
+#BookRating, #catname, #authorname, #byRating {
+    float: left;
+    min-width: 150px;
+    box-sizing: border-box;
     text-decoration: none;
-    border-radius: 5px 10px;
     padding: 5px;
     color: #fff;
-    /*background-color: #5cb85c;
-    border-color: #4cae4c;*/
     cursor: pointer;
     background-color: #337ab7;
     border-color: #337ab7;
+}
+
+#catname, #authorname, #byRating {
+     
+    border-radius: 5px 10px;
+
+}
+
+#authorname, #byRating {
+    margin: 0 20px 0 20px;
 }
 
 .myForm {
@@ -62,4 +82,208 @@ textarea {
 .myForm input {
     border-radius: 5px;
     
+}
+
+#wrapdetail {
+    width: 100%;    
+}
+
+#detailTitle {
+    float:left;
+    width: 100%;
+    
+}
+
+#wrapdetail span {
+    float: left;
+    
+    
+}
+
+#imgdetail {
+    
+    width: 30%;
+    box-sizing: border-box;
+}
+
+#imgdetail img {
+    width: 60%;
+    height: 300px;
+    margin-left: 20%;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+
+#maindetail {
+    width: 70%;
+    
+    height: 300px;
+    box-sizing: border-box;
+}
+
+#descdetail {
+    width: 100%;
+    font-size: 1.5em;
+    min-height: 100px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.wrapContent {
+    float: left;
+    width: 31%;
+    margin: 10px 0 10px 2%;
+    box-sizing: border-box;
+    padding: 5px;
+    border: 3px;
+    background-color: #efefef;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.myTitle {
+    height: 50px;
+    
+}
+
+.myImage img {
+    width: 70%;
+    height: 300px;
+    border-radius: 0 10px 10px 0;
+}
+
+.bfot {
+    float: left;
+    width: 100%;
+    text-align: center;
+    background-color: #efefef;
+    
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+footer {
+    float: left;
+    width: 100%;
+    
+}
+
+.myMenu {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    
+    box-sizing: border-box;
+    background-color: #212121;
+}
+
+
+
+.myMenu div a {
+    text-decoration: none;
+    color: #bcbcbc;
+    font-size: 1.2em;
+}
+
+.name {
+    float: left;
+    margin-left: 10%;
+}
+
+.mySearch {
+    float: left;
+    margin: 10px 5% 10px 5%;
+}
+
+.mySearch input {
+    border-radius: 3px;
+}
+
+.myCart {
+    float: right;
+    margin: 10px 15% 10px 5%;
+}
+
+.myCart sup {
+    color: white;
+    font-size: 1em;
+    background-color: red;
+    border-radius: 100%;
+    padding: 3px;
+    
+}
+
+.starY, .starN {
+    color: #1bb707;
+    font-size: 2em;
+}
+
+
+
+
+
+
+.rating {
+    width: 24%;
+    margin-left: 40%;
+    margin-right: 30%;
+    border: none;
+    float: left;
+    
+}
+
+.rating h3 {
+    text-align:center;
+}
+
+    .rating > input {
+        
+        display: none;
+    }
+
+    .rating > label:before {
+        margin: 5px;
+        font-size: 1.25em;
+        font-family: FontAwesome;
+        display: inline-block;
+        content: "\f005";
+    }
+
+    .rating > .half:before {
+        content: "\f089";
+        position: absolute;
+    }
+
+    .rating > label {
+        color: #ddd;
+        float: right;
+    }
+
+    
+
+    .rating > input:checked ~ label,
+    .rating:not(:checked) > label:hover, 
+    .rating:not(:checked) > label:hover ~ label {
+        color: green;
+    }
+
+
+        .rating > input:checked + label:hover,
+        .rating > input:checked ~ label:hover,
+        .rating > label:hover ~ input:checked ~ label,
+        .rating > input:checked ~ label:hover ~ label {
+            color: #1bb707;
+        }
+
+
+.ratingrat {
+    text-align: center;
+    font-size: 1.2em;
+    font-style:inherit;
+    
+}
+
+.rating hr {
+    border-color: #1bb707;
 }

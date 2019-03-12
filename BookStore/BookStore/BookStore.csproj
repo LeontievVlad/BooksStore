@@ -182,6 +182,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BookAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryAdminController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -254,15 +256,62 @@
     <Compile Include="Migrations\201902251018288_CusName.Designer.cs">
       <DependentUpon>201902251018288_CusName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902261208546_Comments.cs" />
+    <Compile Include="Migrations\201902261208546_Comments.Designer.cs">
+      <DependentUpon>201902261208546_Comments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902261841233_CommentList.cs" />
+    <Compile Include="Migrations\201902261841233_CommentList.Designer.cs">
+      <DependentUpon>201902261841233_CommentList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902261910122_CommentListFirst.cs" />
+    <Compile Include="Migrations\201902261910122_CommentListFirst.Designer.cs">
+      <DependentUpon>201902261910122_CommentListFirst.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902271129439_IColectionComments.cs" />
+    <Compile Include="Migrations\201902271129439_IColectionComments.Designer.cs">
+      <DependentUpon>201902271129439_IColectionComments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902271236019_AddDeleteMethod.cs" />
+    <Compile Include="Migrations\201902271236019_AddDeleteMethod.Designer.cs">
+      <DependentUpon>201902271236019_AddDeleteMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903041118057_WithOutEmail.cs" />
+    <Compile Include="Migrations\201903041118057_WithOutEmail.Designer.cs">
+      <DependentUpon>201903041118057_WithOutEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903042015107_Rating.cs" />
+    <Compile Include="Migrations\201903042015107_Rating.Designer.cs">
+      <DependentUpon>201903042015107_Rating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903042038499_RatingN.cs" />
+    <Compile Include="Migrations\201903042038499_RatingN.Designer.cs">
+      <DependentUpon>201903042038499_RatingN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903042116492_RatingY.cs" />
+    <Compile Include="Migrations\201903042116492_RatingY.Designer.cs">
+      <DependentUpon>201903042116492_RatingY.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903051117210_BookCollOrder.cs" />
+    <Compile Include="Migrations\201903051117210_BookCollOrder.Designer.cs">
+      <DependentUpon>201903051117210_BookCollOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903061107106_AddNameToCom.cs" />
+    <Compile Include="Migrations\201903061107106_AddNameToCom.Designer.cs">
+      <DependentUpon>201903061107106_AddNameToCom.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\BookStoreContext.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\CommentList.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -279,6 +328,19 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\BookAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\BookAdmin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\BookAdmin\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\BookAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\BookAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryAdmin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryAdmin\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoryAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\BookAdmin\Admin.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -290,7 +352,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -322,7 +386,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Books\Create.cshtml" />
-    <Content Include="Views\Books\Delete.cshtml" />
+    <Content Include="Views\Books\DeleteComment.cshtml" />
     <Content Include="Views\Books\Details.cshtml" />
     <Content Include="Views\Books\Edit.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
@@ -339,12 +403,12 @@
     <Content Include="Views\ShoppingCart\Sent.cshtml" />
     <Content Include="Views\ShoppingCart\Contact.cshtml" />
     <Content Include="Views\ShoppingCart\ProfBook.cshtml" />
+    <Content Include="Views\Books\AddComment.cshtml" />
+    <Content Include="Views\Books\_Items.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>
@@ -411,6 +475,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902251018288_CusName.resx">
       <DependentUpon>201902251018288_CusName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902261208546_Comments.resx">
+      <DependentUpon>201902261208546_Comments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902261841233_CommentList.resx">
+      <DependentUpon>201902261841233_CommentList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902261910122_CommentListFirst.resx">
+      <DependentUpon>201902261910122_CommentListFirst.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902271129439_IColectionComments.resx">
+      <DependentUpon>201902271129439_IColectionComments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902271236019_AddDeleteMethod.resx">
+      <DependentUpon>201902271236019_AddDeleteMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903041118057_WithOutEmail.resx">
+      <DependentUpon>201903041118057_WithOutEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903042015107_Rating.resx">
+      <DependentUpon>201903042015107_Rating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903042038499_RatingN.resx">
+      <DependentUpon>201903042038499_RatingN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903042116492_RatingY.resx">
+      <DependentUpon>201903042116492_RatingY.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903051117210_BookCollOrder.resx">
+      <DependentUpon>201903051117210_BookCollOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903061107106_AddNameToCom.resx">
+      <DependentUpon>201903061107106_AddNameToCom.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

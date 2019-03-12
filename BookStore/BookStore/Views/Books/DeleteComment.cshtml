@@ -1,0 +1,27 @@
+﻿
+@model BookStore.Models.Comment
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Comment</h4>
+    <hr />
+    @Html.DisplayFor(model => model.Rating)
+
+    @Html.DisplayFor(model => model.StrComment)
+
+    @using (Html.BeginForm("DeleteComment", "Books", FormMethod.Post))
+    {
+        <p>Your Email:</p>
+        <input type="email" name="userEmail" id="userEmail" />
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+            @Html.ActionLink("Back to List", "Details", new { id = Model.ThisBook })
+        </div>
+    }
+</div>

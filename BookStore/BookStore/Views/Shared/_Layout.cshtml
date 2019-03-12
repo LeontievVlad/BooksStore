@@ -1,52 +1,61 @@
-﻿<!DOCTYPE html>
+﻿@using BookStore.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Book Store</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Book Store", "View", "Books", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Book", "Index", "Books")</li>
-                    <li>@Html.ActionLink("Category", "Index", "Categories")</li>
-                   
-                    <li style="margin: 11px 50px 0 50px;">
+    
+    @{
+        var count = 0;
+        if (Session["Cart"] != null)
+        {
+            List<Cart> quant = (List<Cart>)Session["Cart"];
+            count = quant.Sum(x => x.Quantity);
 
-                        @using (Html.BeginForm("View", "Books", FormMethod.Get))
-                        {
 
-                            @Html.TextBox("search")
-                            <input type="submit" value="Search" class="btn btn-success btn-sm" />
-                        }
-                    </li>
-                    <li style="margin-left: 450px; font-size: 1.2em;">
-                        @Html.ActionLink("Cart", "Index", "ShoppingCart")
-                    </li>
-                </ul>
-                @*@Html.Partial("_LoginPartial")*@
-            </div>
+        }
+
+    }
+
+
+    <div class="myMenu">
+        <div class="name">
+            @Html.ActionLink("Book Store", "View", "Books", new { area = "" }, new { @class = "navbar-brand" })
         </div>
+        <div class="mySearch">
+            @using (Html.BeginForm("View", "Books", FormMethod.Get))
+            {
+
+                @Html.TextBox("search", null, new { onblur = "this.form.submit();" })
+
+            }
+        </div>
+        <div class="myCart">
+            @Html.ActionLink("Cart ", "Index", "ShoppingCart")
+            <sup>&nbsp;@count&nbsp;</sup>
+        </div>
+        
     </div>
+    
+    
+
     <div class="container body-content">
         @RenderBody()
-        <hr />
+
+
+
+
+
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <hr />
+            <p>&copy; @DateTime.Now.Year - Book Store</p>
         </footer>
     </div>
 

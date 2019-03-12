@@ -8,103 +8,136 @@
 
 
 @{
-    ViewBag.Title = "Book Store";
-}
-
-@*@Html.ActionLink("Get my info", "YourInfo", "Books")
-<br/>*@
-
-@*@Html.DropDownList("catname", ViewBag.catname as SelectList, "All Categories", new { onchange = "l" })*@
-<br />
-
-@using (Html.BeginForm("View", "Books", FormMethod.Post))
-{
-
-    @Html.DropDownList("catname", ViewBag.catname as SelectList, new { onchange = "this.form.submit();"  })
-
+    ViewBag.Title = "Main";
 }
 
 
-
 <br />
-<table class="table">
-    <tr>
+<div class="myFilters">
 
-
-        <th class="col-md-2">
-            @*@Html.DisplayNameFor(model => model.ImagePath)*@
-            Books
-        </th>
-        <th class="col-md-1">
-            @*@Html.DisplayNameFor(model => model.Category.NameCategory)*@
-            Category
-        </th>
-        <th class="col-md-2">
-            @*@Html.DisplayNameFor(model => model.Title)*@
-            Title
-        </th>
-        <th class="col-md-2">
-            @*@Html.DisplayNameFor(model => model.Author)*@
-            Author
-        </th>
-        <th class="col-md-3">
-            @*@Html.DisplayNameFor(model => model.Description)*@
-            Description
-        </th>
-        <th class="col-md-1">
-            @*@Html.DisplayNameFor(model => model.Price) &#8372;*@
-            Price &#8372;
-        </th>
-        <th></th>
-
-
-    </tr>
-
-    @foreach (var item in Model)
+    @using (Html.BeginForm("View", "Books", FormMethod.Post))
     {
 
-        //using (Html.BeginForm("AddToCart", "Profiles"))
+        @Html.DropDownList("catname", ViewBag.catname as SelectList, new { onchange = "this.form.submit();" })
 
-            <tr>
-                <td class="col-md-2">
-                    <input type="number" name="BookId" value="@Html.DisplayFor(modelItem => item.BookId)" hidden />
-                    @*@Html.DisplayFor(modelItem => item.ImagePath)*@
-                    <img src="@Url.Content(item.ImagePath) " width="150" height="100" />
-                </td>
-                <td class="col-md-1">
-                    @Html.DisplayFor(modelItem => item.Category.NameCategory)
-                </td>
-                <td class="col-md-2">
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td class="col-md-2">
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
-                <td class="col-md-3">
-                    @Html.DisplayFor(modelItem => item.Desription)
-                </td>
-                <td class="col-md-1">
-                    @Html.DisplayFor(modelItem => item.Price) &#8372;
-                </td>
+    }
 
-                <td>
+    @using (Html.BeginForm("View", "Books", FormMethod.Post))
+    {
+
+        @Html.DropDownList("authorname",  ViewBag.authorname as SelectList, new { onchange = "this.form.submit();" })
+
+    }
+
+    @using (Html.BeginForm("View", "Books", FormMethod.Post))
+    {
+
+        @*@Html.DropDownList("ratBook", ViewBag.ratBook as SelectList, new { onchange = "this.form.submit();" })*@
+        <input type="submit" id="BookRating" name="BookRating" value="Popular" class="btn btn-primary" />
+    }
+    @using (Html.BeginForm("View", "Books", FormMethod.Post))
+    {
+
+        <select id="byRating" name="byRating" onchange="this.form.submit();">
+            <option>Rating</option>
+            <option value="11">All books</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+
+        </select>
+    }
+
+</div>
 
 
-                    @Html.ActionLink("Add to Cart", "OrderNow", "ShoppingCart", new { id = item.BookId}, new { @class = "btn btn-success" })
-                    @*@Html.ActionLink("Index", "Carts", new { id = item.BookId })*@
-                    @*<input type="submit" value="Buy" class="btn btn-success" />*@
+
+<br />
+@*<select>
+        @foreach (var aut in Model)
+        {
+            using (Html.BeginForm("View", "Books", FormMethod.Post))
+            {
+                <option name="aut" id="aut" value="@Html.DisplayFor(modelItem => aut.BookId)">
+                    @Html.DisplayFor(modelItem => aut.Author)
+                </option>
+
+            }
+        }
+    </select>*@
 
 
 
-                </td>
-            </tr>
+@foreach (var item in Model)
+{
+    <div class="wrapContent">
+        <input type="number" name="BookId" value="@Html.DisplayFor(modelItem => item.BookId)" hidden />
 
-        
-    } 
+        <h3 class="myTitle">
+            @Html.DisplayFor(modelItem => item.Title)
+        </h3>
+        <div class="myImage">
+            <img src="@Url.Content(item.ImagePath)" />
+        </div>
 
 
 
-</table>
+
+        <p>
+
+
+            @{
+                int starY = (int)item.RatingBook;
+                int starN = 10 - starY;
+
+            }
+            @for (int i = 0; i < starY; i++)
+            {
+                <span class="starY">
+                    &#9733
+                </span>
+            }
+            @for (int i = 0; i < starN; i++)
+            {
+                <span class="starY">
+                    &#9734
+                </span>
+            }
+        </p>
+        <p>
+            @Html.DisplayFor(modelItem => item.Author)
+        </p>
+        <p>
+            @Html.DisplayFor(modelItem => item.Category.NameCategory)
+        </p>
+
+
+        <p>
+            @Html.DisplayFor(modelItem => item.Price) &#8372;
+        </p>
+        <p>
+            @*@Html.DisplayFor(modelItem => item.Desription)*@
+        </p>
+        <p>
+            @Html.ActionLink("Add to Cart", "OrderNow", "ShoppingCart", new { id = item.BookId }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Details", "Details", "Books", new { id = item.BookId }, new { @class = "btn btn-primary" })
+            @*<input type="submit" value="Buy" class="btn btn-success" />*@
+        </p>
+    </div>
+}
+
+
+
+
+
+
 
 
 @*@using (Html.BeginForm("View", "Books", FormMethod.Post))
@@ -118,20 +151,12 @@
     }*@
 
 
-<script type="text/css">
 
-    .pagination > li > a {
-    display: none;
-    }
-
-    .pagination > li:last-child > a {
-    display: block;
-    }
-
-</script>
 
 <div class="bfot">
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @*<h3>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    </h3>*@ 
 
     @Html.PagedListPager(Model, page => Url.Action("View", new { page }))
 

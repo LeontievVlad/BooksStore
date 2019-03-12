@@ -19,6 +19,11 @@ namespace BookStore.Models
 
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Order> Orders { get; set; }
+
+        public double RatingBook { get; set; }
     }
 }
 

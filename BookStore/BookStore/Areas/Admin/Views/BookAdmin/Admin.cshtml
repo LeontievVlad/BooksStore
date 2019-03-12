@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+
+
+
+@using (Html.BeginForm("Admin", "BookAdmin", FormMethod.Post, new { id = "admin-form" }))
+{
+    
+    <div class="myForm">
+     
+        <p>Name</p>
+        <input type="text" name="adName" id="adName" /><br />
+        <p>Password</p>
+        <input type="password" name="adPassword" id="adPassword" /><br />
+        
+        <br />
+        <input type="submit" id="done" value="Confirm" class="btn btn-success" />
+
+
+    </div>
+}

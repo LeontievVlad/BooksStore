@@ -1,0 +1,12 @@
+﻿@model IEnumerable<BookStore.Models.Comment>
+
+@foreach (var comment in Model)
+{
+<p>
+    Rating: @Html.DisplayFor(modelItem => comment.ThisBook)<br />
+    Comment: @Html.DisplayFor(modelItem => comment.StrComment)<br/>
+    @*@Html.ActionLink("Delete", "DeleteComment", "Books", new{ id = comment.ThisBook})*@
+</p>
+    
+}
+
